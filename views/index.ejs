@@ -2,10 +2,44 @@
 <html>
   <head>
     <title><%= title %></title>
+    <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="row">
+      <div class="mb-3">
+        <label for="msg" class="form-label">Texto para analizar</label>
+        <textarea class="form-control" id="msg" rows="3"></textarea>
+        
+      </div>
+      <div class="col-auto">
+        <button id="enviar" class="btn btn-primary mb-3">Analizar</button>
+      </div>
+    </div>
+    
+
+    <textarea id ="result" class="form-control" placeholder="Resultados" aria-label="Disabled input example" disabled readonly></textarea>
   </body>
+  <script>
+    btn= document.getElementById('enviar')
+    btn.onclick = function() {Analizar()};
+
+function Analizar() {
+  msg=document.getElementById("msg").value
+  var url = 'http://examen-busy-wolverine-wg.mybluemix.net/tone';
+  var url = 'http://localhost:3000/tone';
+
+  console.log({msg:msg})
+  fetch(url, {
+    method: 'POST', 
+    body: {msg:msg}, 
+    headers:{
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+  .catch(error => console.error('Error:', error))
+  .then(response => console.log('Success:', response));
+}
+  </script>
 </html>

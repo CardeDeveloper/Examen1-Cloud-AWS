@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/autor', function(req, res, next) {
-  res.json({ alumno: 'OACA' , servicio:"ECS en AWS");
+  res.json({ alumno: 'OACA' , servicio:'ECS en AWS'});
 });
 
 
