@@ -25,21 +25,23 @@
     btn= document.getElementById('enviar')
     btn.onclick = function() {Analizar()};
 
-function Analizar() {
+async function Analizar() {
   msg=document.getElementById("msg").value
   var url = 'http://examen-busy-wolverine-wg.mybluemix.net/tone';
-  var url = 'http://localhost:3000/tone';
+  //var url = 'http://localhost:3000/tone';
 
   console.log({msg:msg})
   fetch(url, {
     method: 'POST', 
-    body: {msg:msg}, 
+    body: JSON.stringify({msg:msg}), 
     headers:{
       'Content-Type': 'application/json'
     }
   }).then(res => res.json())
   .catch(error => console.error('Error:', error))
-  .then(response => console.log('Success:', response));
+  .then(response => {
+    document.getElementById('result').value= JSON.stringify(response)
+  });
 }
   </script>
 </html>
